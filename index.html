@@ -1,0 +1,819 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hotel Valle del Volcán - Experiencia Termal en Copahue</title>
+    <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!-- Meta Pixel Code -->
+    <script>
+        !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+        n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+        n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+        t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window, document,'script','https://connect.facebook.net/en_US/fbevents.js');
+        fbq('init', 'XXXXX');
+        fbq('track', 'PageView');
+    </script>
+    <noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=XXXXX&ev=PageView&noscript=1"/></noscript>
+    <style>
+        :root {
+            --primary-color: #00695C; /* Teal - Thermal Water */
+            --primary-light: #4DB6AC;
+            --primary-dark: #004D40;
+            --secondary-color: #5D4037; /* Brown - Volcanic Stone */
+            --secondary-light: #8D6E63;
+            --accent-color: #D4AF37; /* Gold - Premium touch */
+            --bg-color: #FAF9F6; /* Warm off-white */
+            --card-bg: #FFFFFF;
+            --text-primary: #212121;
+            --text-secondary: #616161;
+            --whatsapp-green: #25D366;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-primary);
+            line-height: 1.6;
+            max-width: 100%;
+            margin: 0 auto;
+            overflow-x: hidden;
+            min-height: 100vh;
+            position: relative;
+            width: 100%;
+        }
+
+        .container {
+            padding: 0 20px;
+            width: 100%;
+            max-width: 720px;
+            margin: 0 auto;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Lora', serif;
+            color: var(--secondary-color);
+        }
+
+        /* Header */
+        header {
+            background-color: rgba(255, 255, 255, 0.95);
+            padding: 15px 20px;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 100%;
+        }
+
+        .logo {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--primary-dark);
+            font-family: 'Lora', serif;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .contact-mini {
+            font-size: 0.8rem;
+            color: var(--secondary-color);
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        /* Hero Section with Video Background - FIXED */
+        .hero {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            overflow: hidden;
+            margin-top: 0;
+            padding: 0;
+        }
+
+        .video-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -3;
+            overflow: hidden;
+        }
+        
+        .video-background {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            min-width: 100%;
+            min-height: 100%;
+            width: 177.77vh; /* 16/9 aspect ratio */
+            height: 56.25vw; /* 16/9 aspect ratio */
+            z-index: -2;
+            object-fit: cover;
+        }
+        
+        /* Fallback image if video fails or loads slow */
+        .hero-fallback {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('https://sfile.chatglm.cn/images-ppt/d79a7a90775d.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            z-index: -4;
+        }
+
+        /* Placeholder image while the YouTube video inicia */
+        .video-placeholder {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('portada-hotel-valle-del-volcan.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            z-index: -2;
+            animation: heroPlaceholderFade 0.8s ease-out 3s forwards, heroPlaceholderPan 16s linear infinite;
+        }
+
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, rgba(0, 77, 64, 0.4), rgba(93, 64, 55, 0.7));
+            z-index: -1;
+        }
+
+        @keyframes heroPlaceholderFade {
+            to {
+                opacity: 0;
+                visibility: hidden;
+            }
+        }
+
+        @keyframes heroPlaceholderPan {
+            0% { background-position: 0% center; }
+            50% { background-position: 100% center; }
+            100% { background-position: 0% center; }
+        }
+
+        .hero-content {
+            padding: 80px 20px 20px;
+            z-index: 1;
+            width: 90%;
+            max-width: 600px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .hero h1 {
+            font-size: clamp(1.8rem, 5vw, 2.5rem); /* Responsive font size */
+            line-height: 1.2;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+            color: #fff;
+        }
+
+        .hero p {
+            font-size: clamp(1rem, 3vw, 1.1rem); /* Responsive font size */
+            margin-bottom: 25px;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+        }
+
+        .btn-cta {
+            background-color: var(--whatsapp-green);
+            color: white;
+            padding: 15px 30px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: clamp(1rem, 3vw, 1.1rem); /* Responsive font size */
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            box-shadow: 0 4px 15px rgba(37, 211, 102, 0.4);
+            transition: transform 0.2s;
+            border: none;
+            cursor: pointer;
+            z-index: 10;
+            position: relative;
+        }
+
+        .btn-cta.hero-cta {
+            animation: heroPulse 2.3s infinite;
+        }
+
+        .btn-cta:hover {
+            transform: translateY(-2px);
+            background-color: #1ebc57;
+        }
+
+        /* Sections General */
+        section {
+            padding: 60px 0;
+            position: relative;
+            z-index: 5;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+            color: var(--secondary-color);
+            position: relative;
+            padding-bottom: 15px;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 3px;
+            background-color: var(--primary-color);
+        }
+
+        .section-subtitle {
+            text-align: center;
+            color: var(--text-secondary);
+            margin-bottom: 30px;
+            font-size: 1rem;
+        }
+
+        /* Intro / About */
+        .intro {
+            background-color: white;
+            text-align: center;
+        }
+        
+        .intro-text {
+            max-width: 600px;
+            margin: 0 auto;
+            font-size: 1.05rem;
+            color: #424242;
+        }
+
+        /* Benefits Grid */
+        .benefits {
+            background-color: var(--bg-color);
+        }
+
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .benefit-card {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .benefit-icon {
+            font-size: 36px;
+            color: var(--primary-color);
+            margin-bottom: 10px;
+        }
+
+        .benefit-card h3 {
+            font-size: 1rem;
+            margin-bottom: 5px;
+            font-family: 'Roboto', sans-serif;
+            font-weight: 700;
+        }
+
+        .benefit-card p {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+
+        /* Experience Section */
+        .experience {
+            background-color: #E0F2F1; /* Very light teal */
+        }
+
+        .exp-content {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+        }
+
+        .exp-img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+        }
+
+        .exp-text {
+            padding: 25px;
+        }
+
+        .exp-text h3 {
+            margin-bottom: 10px;
+            font-size: 1.4rem;
+        }
+
+        /* Packages / Pricing */
+        .packages {
+            background-color: white;
+        }
+
+        .package-card {
+            border: 1px solid #eee;
+            border-radius: 12px;
+            padding: 25px;
+            margin-bottom: 20px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .package-card.featured {
+            border-color: var(--primary-color);
+            background: #F0FDFA;
+        }
+        
+        .badge {
+            position: absolute;
+            top: 0;
+            right: 0;
+            background: var(--primary-color);
+            color: white;
+            padding: 5px 15px;
+            font-size: 0.8rem;
+            border-bottom-left-radius: 12px;
+            font-weight: bold;
+        }
+
+        .price {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--secondary-color);
+            margin: 15px 0;
+            font-family: 'Lora', serif;
+        }
+
+        .price span {
+            font-size: 0.9rem;
+            font-weight: 400;
+            color: var(--text-secondary);
+        }
+
+        .features-list {
+            list-style: none;
+            margin: 20px 0;
+            text-align: left;
+            padding-left: 20px;
+        }
+
+        .features-list li {
+            margin-bottom: 8px;
+            font-size: 0.95rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .features-list i {
+            color: var(--primary-color);
+            font-size: 18px;
+            margin-right: 10px;
+        }
+
+        /* Testimonials */
+        .testimonials {
+            background-color: var(--secondary-color);
+            color: white;
+        }
+        
+        .testimonial-card {
+            background: rgba(255,255,255,0.1);
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            font-style: italic;
+        }
+        
+        .testimonial-author {
+            margin-top: 10px;
+            font-style: normal;
+            font-size: 0.9rem;
+            font-weight: bold;
+            color: var(--primary-light);
+        }
+
+        /* Gallery CTA */
+        .gallery-cta-section {
+            background-color: var(--bg-color);
+            text-align: center;
+        }
+
+        .gallery-cta-wrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 18px;
+        }
+
+        .gallery-frame {
+            position: relative;
+            width: 100%;
+            max-width: 720px;
+            padding: 14px;
+            background: #fff;
+            border: 6px solid #fff;
+            box-shadow: 0 14px 30px rgba(0,0,0,0.12);
+            transform: rotate(-1.8deg);
+            transition: transform 0.25s ease, box-shadow 0.25s ease;
+        }
+
+        .gallery-frame:hover {
+            transform: rotate(-0.5deg) scale(1.01);
+            box-shadow: 0 18px 36px rgba(0,0,0,0.16);
+        }
+
+        .gallery-image {
+            width: 100%;
+            display: block;
+            border-radius: 8px;
+            object-fit: cover;
+        }
+
+        .gallery-cta-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            padding: 12px 24px;
+            border-radius: 40px;
+            background: var(--primary-dark);
+            color: #fff;
+            text-decoration: none;
+            font-weight: 700;
+            box-shadow: 0 6px 18px rgba(0,0,0,0.12);
+            transition: transform 0.2s ease, background 0.2s ease;
+        }
+
+        .gallery-cta-btn:hover {
+            background: var(--primary-color);
+            transform: translateY(-2px);
+        }
+
+        /* Footer */
+        footer {
+            background-color: #263238;
+            color: #cfd8dc;
+            padding: 40px 20px 80px 20px; /* Extra padding for sticky button */
+            text-align: center;
+        }
+
+        footer h4 {
+            color: white;
+            margin-bottom: 15px;
+        }
+
+        /* Sticky WhatsApp Button */
+        .sticky-whatsapp {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 999;
+            background-color: var(--whatsapp-green);
+            color: white;
+            border-radius: 50px;
+            padding: 12px 25px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            animation: pulse 2s infinite;
+            opacity: 0;
+            pointer-events: none;
+            transform: translateY(12px);
+        }
+
+        .sticky-whatsapp:hover {
+            transform: scale(1.05);
+        }
+
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7); }
+            70% { box-shadow: 0 0 0 15px rgba(37, 211, 102, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
+        }
+
+        @keyframes heroPulse {
+            0% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.35); transform: translateY(0); }
+            55% { box-shadow: 0 0 0 14px rgba(37, 211, 102, 0); transform: translateY(-2px); }
+            100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); transform: translateY(0); }
+        }
+
+        .sticky-whatsapp.visible {
+            opacity: 1;
+            pointer-events: auto;
+            transform: translateY(0);
+        }
+
+        /* Responsive Tweaks */
+        @media (max-width: 480px) {
+            .hero h1 { 
+                font-size: 1.8rem;
+                margin-bottom: 10px;
+            }
+            
+            .hero p {
+                font-size: 1rem;
+                margin-bottom: 20px;
+            }
+            
+            .btn-cta {
+                padding: 12px 24px;
+                font-size: 1rem;
+            }
+            
+            .benefits-grid { 
+                grid-template-columns: 1fr; 
+            }
+            
+            .section-title { 
+                font-size: 1.5rem; 
+            }
+            
+            section {
+                padding: 40px 0;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <header>
+        <div class="logo">Hotel Valle del Volcán</div>
+        <div class="contact-mini">
+            <i class="material-icons" style="font-size:16px;">location_on</i> Copahue
+        </div>
+    </header>
+
+    <!-- Hero Section with VSL -->
+    <div class="hero">
+        <!-- Fallback Image -->
+        <div class="hero-fallback"></div>
+        
+        <!-- Video Container for proper sizing -->
+        <div class="video-container">
+            <!-- YouTube Iframe for Video Background -->
+            <iframe class="video-background" 
+                    src="https://www.youtube.com/embed/J-8a2EiDTgg?autoplay=1&mute=1&controls=0&loop=1&playlist=J-8a2EiDTgg&showinfo=0&modestbranding=1&rel=0&disablekb=1&fs=0" 
+                    title="Hotel Valle del Volcán Video" 
+                    frameborder="0" 
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                    allowfullscreen>
+            </iframe>
+        </div>
+
+        <!-- Placeholder visible los primeros 2s mientras inicia el video -->
+        <div class="video-placeholder"></div>
+        
+        <div class="hero-overlay"></div>
+        
+        <div class="hero-content">
+            <h1>Bienestar real, en su forma más natural</h1>
+            <p>No es turismo. Es descanso profundo para personas agotadas.</p>
+            <a href="https://wa.me/5491131827783?text=Hola,%20quiero%20saber%20los%20precios%20del%20Hotel%20Valle%20del%20Volcán" class="btn-cta hero-cta">
+                <i class="material-icons">chat</i> Consultar precios por WhatsApp
+            </a>
+        </div>
+    </div>
+
+    <!-- Intro Section -->
+    <section class="intro">
+        <div class="container">
+            <h2 class="section-title">Bienvenidos a Copahue</h2>
+            <p class="section-subtitle">Un paraíso escondido entre montañas y volcanes</p>
+            <div class="intro-text">
+                <p>Situado a metros de las famosas <strong>Termas de Copahue</strong>, nuestro hotel te ofrece una experiencia única donde la calidez del hogar se encuentra con la naturaleza más pura. Vive el bienestar integral en un entorno de vapor, montañas nevadas y silencio reparador.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Benefits Section -->
+    <section class="benefits">
+        <div class="container">
+            <h2 class="section-title">¿Por qué elegirnos?</h2>
+            <p class="section-subtitle">Todo lo que necesitas para tu desconexión perfecta</p>
+            <div class="benefits-grid">
+                <div class="benefit-card">
+                    <i class="material-icons benefit-icon">hot_tub</i>
+                    <h3>Aguas Curativas</h3>
+                    <p>Acceso directo a termas volcánicas con propiedades reumáticas y dermatológicas.</p>
+                </div>
+                <div class="benefit-card">
+                    <i class="material-icons benefit-icon">restaurant_menu</i>
+                    <h3>Gastronomía Casera</h3>
+                    <p>Disfruta de media pensión o pensión completa con platos regionales y caseros.</p>
+                </div>
+                <div class="benefit-card">
+                    <i class="material-icons benefit-icon">landscape</i>
+                    <h3>Naturaleza Pura</h3>
+                    <p>Ubicado en plena cordillera patagónica. Paisajes que te quitan el aliento.</p>
+                </div>
+                <div class="benefit-card">
+                    <i class="material-icons benefit-icon">home</i>
+                    <h3>Ambiente Familiar</h3>
+                    <p>Atención personalizada por sus dueños. Te harás sentir como en casa.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section class="experience">
+        <div class="container">
+            <h2 class="section-title">La Experiencia</h2>
+            <div class="exp-content">
+                <img src="https://hotelvalledelvolcan.info/assets/images/portada-hotel-valle-del-volcan.jpg" alt="Hotel exterior" class="exp-img">
+                <div class="exp-text">
+                    <h3>Confort Rústico & Relax Premium</h3>
+                    <p>Nuestras habitaciones están diseñadas para tu descanso absoluto. Después de un día disfrutando de las nieves o las aguas termales, vuelve a un ambiente cálido, con atención detail-oriented y todos los servicios para olvidarte del estrés.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Packages Section -->
+    <section class="packages">
+        <div class="container">
+            <h2 class="section-title">Planes de Alojamiento</h2>
+            <p class="section-subtitle">Elige la opción que mejor se adapte a tu viaje</p>
+            
+            <!-- Package 1 -->
+            <div class="package-card">
+                <h3>Media Pensión</h3>
+                <div class="price">$75.000 <span>/ noche</span></div>
+                <ul class="features-list">
+                    <li><i class="material-icons">check</i> Alojamiento en habitación calefaccionada</li>
+                    <li><i class="material-icons">check</i> Desayuno y Cena incluidos</li>
+                    <li><i class="material-icons">check</i> Wi-Fi y TV Satelital</li>
+                    <li><i class="material-icons">check</i> Acceso a pileta y gimnasio</li>
+                </ul>
+                <a href="https://wa.me/5491131827783?text=Hola,%20quiero%20saber%20los%20precios%20de%20la%20Media%20Pensión" class="btn-cta" style="padding: 10px 20px; font-size: 0.9rem;">Consultar Precios</a>
+            </div>
+
+            <!-- Package 2 (Featured) -->
+            <div class="package-card featured">
+                <div class="badge">Más Elegido</div>
+                <h3>Pensión Completa</h3>
+                <div class="price">$85.000 <span>/ noche</span></div>
+                <ul class="features-list">
+                    <li><i class="material-icons">check</i> Alojamiento en habitación calefaccionada</li>
+                    <li><i class="material-icons">check</i> Desayuno, Almuerzo y Cena incluidos</li>
+                    <li><i class="material-icons">check</i> Sin preocupaciones, todo resuelto</li>
+                    <li><i class="material-icons">check</i> Mejor relación precio-calidad</li>
+                </ul>
+                <a href="https://wa.me/5491131827783?text=Hola,%20quiero%20saber%20los%20precios%20de%20la%20Pensión%20Completa" class="btn-cta" style="padding: 10px 20px; font-size: 0.9rem;">Consultar Precios</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="testimonials">
+        <div class="container">
+            <h2 class="section-title" style="color: white;">Lo que dicen nuestros huéspedes</h2>
+            <div class="testimonial-card">
+                <p>"El lugar es increíble, muy cerca de las termas y el trato de los dueños es espectacular. La comida casera te hace sentir como en casa."</p>
+                <div class="testimonial-author">- María G.</div>
+            </div>
+            <div class="testimonial-card">
+                <p>"Fuimos en temporada de nieve y fue mágico. El hotel está siempre calefaccionado y las duchas de agua caliente son perfectas."</p>
+                <div class="testimonial-author">- Carlos R.</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery CTA Section -->
+    <section class="gallery-cta-section" aria-labelledby="gallery-cta-heading">
+        <div class="container gallery-cta-wrapper">
+            <div>
+                <h2 id="gallery-cta-heading" class="section-title">Galería</h2>
+                <p class="section-subtitle">Descubrí más fotos reales del hotel y Copahue</p>
+            </div>
+            <a href="https://hotelvalledelvolcan.info/#gallery-our" target="_blank" rel="noopener" class="gallery-frame" aria-label="Abrir galería completa en nueva pestaña">
+                <img src="gallery.png" alt="Collage de la galería del Hotel Valle del Volcán" class="gallery-image">
+            </a>
+            <a href="https://hotelvalledelvolcan.info/#gallery-our" target="_blank" rel="noopener" class="gallery-cta-btn">Ver Galería de Fotos</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <h4>Hotel Valle del Volcán</h4>
+            <p>Herrero Ducloux 120, Copahue, Neuquén</p>
+            <p>Argentina</p>
+            <br>
+            <p><i class="material-icons" style="font-size:14px; vertical-align: middle;">phone</i> +54 9 11 3182-7783</p>
+        </div>
+    </footer>
+
+    <!-- Sticky WhatsApp Button -->
+    <a href="https://wa.me/5491131827783?text=Hola,%20quiero%20saber%20los%20precios%20para%20hospedarme" class="sticky-whatsapp" id="stickyWhatsapp">
+        <span aria-hidden="true" style="display:inline-flex; align-items:center; justify-content:center; width:22px; height:22px;">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M20.5 3.5a11 11 0 0 0-17 13l-1 4 4-1a11 11 0 0 0 6 2 11 11 0 0 0 8-18z"/>
+                <path d="M8.5 8a6 6 0 0 0 7.5 7.5l1-1.8a1 1 0 0 0-.2-1.2l-1.1-.7a1 1 0 0 0-1.1.1l-.8.5a7 7 0 0 1-3.4-3.4l.5-.8a1 1 0 0 0 .1-1.1l-.7-1.1a1 1 0 0 0-1.2-.2z"/>
+            </svg>
+        </span>
+        <span>Consultar</span>
+    </a>
+
+    <script>
+        (function() {
+            var sticky = document.getElementById('stickyWhatsapp');
+            var hero = document.querySelector('.hero');
+            if (!sticky || !hero) return;
+            function toggleSticky() {
+                var heroBottom = hero.getBoundingClientRect().bottom;
+                if (heroBottom <= 0) {
+                    sticky.classList.add('visible');
+                } else {
+                    sticky.classList.remove('visible');
+                }
+            }
+            window.addEventListener('scroll', toggleSticky, { passive: true });
+            toggleSticky();
+        })();
+    </script>
+
+    <script>
+        (function() {
+            if (typeof fbq !== 'function') return;
+
+            function bindClick(selector, eventName, payloadBuilder) {
+                var nodes = document.querySelectorAll(selector);
+                nodes.forEach(function(node) {
+                    node.addEventListener('click', function() {
+                        var payload = payloadBuilder ? payloadBuilder(node) : {};
+                        fbq('trackCustom', eventName, payload);
+                    });
+                });
+            }
+
+            bindClick('a[href*="wa.me/"]', 'WhatsAppClick', function(node) {
+                return {
+                    href: node.href,
+                    link_text: (node.textContent || '').trim()
+                };
+            });
+
+            bindClick('.gallery-frame, .gallery-cta-btn', 'GalleryClick', function(node) {
+                return {
+                    href: node.href,
+                    link_text: (node.textContent || '').trim()
+                };
+            });
+        })();
+    </script>
+
+</body>
+</html>
