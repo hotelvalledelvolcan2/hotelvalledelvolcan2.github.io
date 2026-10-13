@@ -8,14 +8,19 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <!-- Meta Pixel Code -->
     <script>
-        !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-        n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
-        n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
-        t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window, document,'script','https://connect.facebook.net/en_US/fbevents.js');
-        fbq('init', 'XXXXX');
+        !function(f,b,e,v,n,t,s)
+        {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+        n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+        if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+        n.queue=[];t=b.createElement(e);t.async=!0;
+        t.src=v;s=b.getElementsByTagName(e)[0];
+        s.parentNode.insertBefore(t,s)}(window, document,'script',
+        'https://connect.facebook.net/en_US/fbevents.js');
+        fbq('init', '1636684131097083');
         fbq('track', 'PageView');
     </script>
-    <noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=XXXXX&ev=PageView&noscript=1"/></noscript>
+    <noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=1636684131097083&ev=PageView&noscript=1" /></noscript>
+    <!-- End Meta Pixel Code -->
     <style>
         :root {
             --primary-color: #00695C; /* Teal - Thermal Water */
@@ -783,34 +788,38 @@
             window.addEventListener('scroll', toggleSticky, { passive: true });
             toggleSticky();
         })();
-    </script>
 
-    <script>
+        // Dispara el evento Contact cuando se hace clic en cualquier enlace de WhatsApp
         (function() {
-            if (typeof fbq !== 'function') return;
+            var whatsappLinks = document.querySelectorAll('a[href^="https://wa.me"]');
+            if (!whatsappLinks.length) return;
 
-            function bindClick(selector, eventName, payloadBuilder) {
-                var nodes = document.querySelectorAll(selector);
-                nodes.forEach(function(node) {
-                    node.addEventListener('click', function() {
-                        var payload = payloadBuilder ? payloadBuilder(node) : {};
-                        fbq('trackCustom', eventName, payload);
-                    });
-                });
+            function triggerContact() {
+                if (typeof fbq === 'function') {
+                    console.log('Meta Pixel: Contact event triggered');
+                    fbq('track', 'Contact');
+                }
             }
 
-            bindClick('a[href*="wa.me/"]', 'WhatsAppClick', function(node) {
-                return {
-                    href: node.href,
-                    link_text: (node.textContent || '').trim()
-                };
-            });
+            function handleClick(event) {
+                // Modifier keys or middle-click: dejamos que abra nueva pestaña/ventana
+                if (event.ctrlKey || event.metaKey || event.shiftKey || event.altKey || event.button === 1) {
+                    triggerContact();
+                    return;
+                }
+                // Navegación en la misma pestaña: retrasamos un instante para que dispare el pixel
+                event.preventDefault();
+                var href = this.href;
+                triggerContact();
+                setTimeout(function() {
+                    window.location.href = href;
+                }, 180);
+            }
 
-            bindClick('.gallery-frame, .gallery-cta-btn', 'GalleryClick', function(node) {
-                return {
-                    href: node.href,
-                    link_text: (node.textContent || '').trim()
-                };
+            whatsappLinks.forEach(function(link) {
+                link.addEventListener('click', handleClick);
+                // auxclick: middle-click suele abrir en nueva pestaña
+                link.addEventListener('auxclick', triggerContact);
             });
         })();
     </script>
